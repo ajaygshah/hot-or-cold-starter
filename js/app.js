@@ -11,28 +11,30 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
-  	var count = 0;
-  	$("#userGuess").focus();
- 
+  	var count = 0; //to start a variable to record the number of tries
+    var comp_num = new_num();  //store the random number
+  	$("#userGuess").focus(); //focus the cursor in the input box
+    click_behavior(); //now the game begins and acts as per the user input
+
   		
+
  //generate a random number
   function new_num () {
-  	var num = Math.floor(Math.random()*100);
+  	var num = (Math.floor(Math.random()*100))+1;
   	return num;
   }
   //......................
 
-  	var comp_num = new_num();
-  	alert(comp_num);
-  	click_behavior();
-
+  
   //To reset the game on new game click
 	function new_game () {
+    count = 0;
 		$("#count").text("0");
 		$("#guessList li").remove();
     $("#feedback").text("Make your Guess!");
 		var comp_num = new_num();
-		alert(comp_num);
+    $("#userGuess").focus();
+    return false;
 	}  
 
 	$(".new").click(function() {
@@ -106,13 +108,14 @@ function click_behavior () {
             }
           }
 
+          if(guess == comp_num) {
+              $("#guessList").append("<li>" + guess +  "</li>");            
+              $("#feedback").text("You got it! Start a new game.");
+          }
 
-           
   				$("#userGuess").val("").focus();
-
          
   				return false;
-          
   			}
 
 
@@ -123,4 +126,3 @@ function click_behavior () {
 });
 
 
- $("#guessList").append("<li>" + guess +  "</li>");

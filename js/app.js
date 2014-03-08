@@ -31,7 +31,8 @@ $(document).ready(function(){
 		$("#count").text("0");
 		$("#guessList li").remove();
     $("#feedback").text("Make your Guess!");
-		var comp_num = new_num();
+		comp_num = new_num();
+    $("#userGuess").fadeIn();
     $("#userGuess").focus();
     return false;
 	}  
@@ -80,7 +81,7 @@ function click_behavior () {
           if(guess < comp_num) {
              if($("#guessList").has("li").length==0) {
                 $("#guessList").append("<li>" + guess +  "</li>");
-                $("#feedback").text("It is cold!");
+                $("#feedback").text("Brrr! Raise the temperature.");
              }
             if(guess > +$(document).find("li").last().html()) {
               $("#guessList").append("<li>" + guess +  "</li>");
@@ -95,11 +96,11 @@ function click_behavior () {
           if(guess > comp_num) {
              if($("#guessList").has("li").length==0) {
                 $("#guessList").append("<li>" + guess +  "</li>");
-                $("#feedback").text("It is hot, red hot!");
+                $("#feedback").text("Too hot! Drop it lower.");
              }
               if(guess < +$(document).find("li").last().html()) {
               $("#guessList").append("<li>" + guess +  "</li>");
-              $("#feedback").text("Getting closer by cooling off.");
+              $("#feedback").text("Getting closer to the number!");
             }
                if(guess > +$(document).find("li").last().html()) {
               $("#guessList").append("<li>" + guess +  "</li>");
@@ -110,6 +111,8 @@ function click_behavior () {
           if(guess == comp_num) {
               $("#guessList").append("<li>" + guess +  "</li>");            
               $("#feedback").text("You got it! Start a new game.");
+              alert("Start a new game.");
+              $("#userGuess").fadeOut();
           }
 
   				$("#userGuess").val("").focus();
